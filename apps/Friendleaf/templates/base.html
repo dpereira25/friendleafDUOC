@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+  {% load static %}
+  <title>Friendleaf</title>
+
+</head>
+
+<body onload="startTime()">
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img src="{% static 'img/logoPagina.png' %}" id="logoPagina" alt="">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/hazteSocio">Hazte socio</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Administrador
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/agregarP">Agregar producto</a></li>
+              <li><a class="dropdown-item" href="/editarP">Editar productos</a></li>
+              <li><a class="dropdown-item" href="/listarP">Listar productos</a></li>
+              <li><a class="dropdown-item" href="/envios">Envios</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+        <div class="btn-group">
+          <a class="btn btn-light" href="/pruebaCarrito">
+            <i class="bi bi-cart4">Tu carrito</i>
+          </a>
+          <a onclick="darkMode()" id="btnDark" href="#" class="btn btn-dark">
+            <i class="bi bi-moon"></i>
+          </a>
+          <a onclick="lightMode()" id="btnLight" href="#" class="btn btn-light">
+            <i class="bi bi-brightness-high"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  </div>
+  </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="clockdate-wrapper content-align-start">
+          <div id="clock"></div>
+          <div id="date"></div>
+        </div>
+      </div>
+      <div id="temp" class="col">
+        <div class="temp">
+          °C
+        </div>
+      </div>
+      <div id="location" class="col">
+        <div class="location"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  {% block body %}
+
+  
+  
+  {% endblock %}
+
+
+  <div class="card mt-3">
+    <div class="card-body">
+      <h3 class="card-title">¿Quienes somos?</h3>
+      <p class="card-text">Somos un grupo de vecinos amantes de la jardineria al igual que tu dispuestos a ayudar a que
+        tu jardin sea cada dia mas variado y visualmente atractivo.</p>
+      <a href="https://www.instagram.com/" class="btn btn-dark bi bi-instagram mt-1"> Instragram</a>
+      <a href="https://www.facebook.com/" class="btn btn-dark bi bi-facebook mt-1"> Facebook</a>
+
+      <button type="button" class="btn btn-dark bi bi-send-check-fill mt-1" data-bs-toggle="modal"
+        data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap"> Envianos una sugerencia</button>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Dejanos tu opinion</h1>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group mb-3">
+                  <label>Correo:</label>
+                  <input type="email" class="form-control" placeholder="example@correo.cl" id="correo-name">
+                  <label>Sugerencia:</label>
+                  <textarea class="form-control" placeholder="Tu pagina es excelente sigue asi"
+                    id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-dark">Enviar mensaje</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+  crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+  integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+  crossorigin="anonymous"></script>
+
+  <script src="{% static 'js/api.js' %}"></script>
+  <script src="{% static 'js/reloj.js' %}"></script>
+</body>
+
+</html>
