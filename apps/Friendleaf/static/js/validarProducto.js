@@ -72,27 +72,46 @@ $(function () {
 
     $("#agregarP").validate({
         rules: {
-            txtIdProducto: { 
-                required: true, 
-                number: true },
-            txtNombreProducto: { 
-                required: true, 
-                minlength: 3 },
-            txtPrecioProducto: { 
-                required: true, 
-                number: true }
+            txtIdProducto: {
+                required: true,
+                number: true
+            },
+            txtNombreProducto: {
+                required: true,
+                minlength: 3
+            },
+            txtPrecioProducto: {
+                required: true,
+                number: true
+            }
         }, messages: {
             txtIdProducto: {
                 required: "Este campo es obligatorio",
                 number: "Este campo debe ser numerico"
-            },txtNombreProducto: {
-                required: "Este campo es obligatorio", 
-                minlength: "Este campo debe tener minimo 3 caracteres" 
-            },txtPrecioProducto: {
-                required: "Este campo es obligatorio", 
-                number: "Este campo debe ser numerico" 
+            }, txtNombreProducto: {
+                required: "Este campo es obligatorio",
+                minlength: "Este campo debe tener minimo 3 caracteres"
+            }, txtPrecioProducto: {
+                required: "Este campo es obligatorio",
+                number: "Este campo debe ser numerico"
             }
         }
     })
 
 })
+
+const formulario = document.getElementById('agregarP');
+const txtNombre = document.getElementById('txtNombreProducto');
+
+
+
+(function () {
+
+    formulario.addEventListener('submit', function (event) { });
+    let nombre = String(nombre).trim();
+    if (nombre.length == 0) {
+        alert("El nombre no puede estar vacio");
+        event.preventDefault();
+    }
+
+})();

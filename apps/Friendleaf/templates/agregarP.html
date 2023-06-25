@@ -8,32 +8,77 @@
 <h1 class="text-center">Agregar Productos</h1>
 
 <div class="container">
-  <form id="agregarP" action="">
+  <form id="agregarP" action="/agregarProductoForm" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <div class="row">
-      <div class="col mt-3">
-        <label for="txtIdProducto">Id:</label>
-        <input id="txtIdProducto" name="txtIdProducto" type="text" class="form-control">
-        <br>
-        <label for="txtPrecioProducto">Precio:</label>
-        <input id="txtPrecioProducto" name="txtPrecioProducto" type="number" class="form-control">
-        <br>
+      <div class="col-md-6">
+        <label for="txtSku">SKU:</label>
+        <input name="txtSku" id="txtSku" type="text" class="form-control">
       </div>
-      <div class="col mt-3">
-        <label for="txtNombreProducto">Nombre:</label>
-        <input id="txtNombreProducto" name="txtNombreProducto" type="text" class="form-control">
-        <br>
-        <label for="txtTamanoProducto">Tamaño:</label>
-        <select id="txtTamanoProducto" name="txtTamanoProducto" class="form-select" aria-label="Default select example">
-          <option value="1">Pequeña</option>
-          <option value="2">Mediana</option>
-          <option value="3">Grande</option>
+      <div class="col-md-6">
+        <label for="txtnombre">Nombre:</label>
+        <input name="txtnombre" id="txtnombre" type="text" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="txtprecio">Precio:</label>
+        <input name="txtprecio" id="txtprecio" type="text" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="txtStock">Stock:</label>
+        <input name="txtStock" id="txtStock" type="text" class="form-control">
+      </div>
+      <div class="col-md-6">
+        <label for="cmbCategoria">Categoria:</label>
+        <select id="cmbCategoria" name="cmbCategoria" class="form-select" aria-label="Default select example">
+          <option disabled selected>Seleccione</option>
+          {% for c in cate %}
+          <option value="{{c.id_categoria}}">{{c.nombre_categoria}}</option>
+          {% endfor %}
         </select>
-        <br>
       </div>
-      <button class="btn btn-success mt-3">Agregar</button>
+      <div class="col-md-6">
+        <label for="txtImagen">Imagen:</label>
+        <input name="txtImagen" id="txtImagen" type="file" class="form-control">
+      </div>
+      <div class="col-md-12">
+        <label for="txtDescripcion">Descripcion:</label>
+        <input name="txtDescripcion" id="txtDescripcion" type="text" class="form-control">
+      </div>
     </div>
+    <button class="btn btn-success mt-5 w-100">Agregar producto</button>
   </form>
 </div>
+<div class="container mt-5">
+  <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">SKU</th>
+              <th scope="col">Imagen</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Opciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for p in prod %}
+          <tr>
+              <th scope="row">{{p.sku}}</th>
+              <td><img src="{{p.imagenUrl.url}}" alt="50" height="50"></td>
+              <td>{{p.nombre}}</td>
+              <td>{{p.precio}}</td>
+              <td>{{p.descripcion}}</td>
+              <td>{{p.categoriaId.nombre_categoria}}</td>
+              <td>{{p.stock}}</td>
+              <td><a href="editarP/{{p.sku}}" class="btn btn-primary">Editar</a></td>
+              <td><a href="eliminarP/{{p.sku}}" class="btn btn-danger">Eliminar</a></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
 
 <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
 <script src="{% static 'js/jquery.validate.min.js' %}"></script>

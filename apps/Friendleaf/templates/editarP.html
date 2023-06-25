@@ -8,29 +8,53 @@
 <h1 class="text-center">Editar Productos</h1>
 
 <div class="container">
-  <form id="agregarP" action="">
-    <div class="row">
-      <div class="col mt-3">
-        <label for="txtIdProducto">Id:</label>
-        <input id="txtIdProducto" name="txtIdProducto" type="text" class="form-control">
-        <br>
-        <label for="txtPrecioProducto">Precio:</label>
-        <input id="txtPrecioProducto" name="txtPrecioProducto" type="number" class="form-control">
+  <form action="/editarP" method="POST" enctype="multipart/form-data">{% csrf_token %}
+      <div class="row">
+          <div class="col-md-6">
+              <label for="txtSku">SKU:</label>
+              <input readonly value="{{prod.sku}}" name="txtSku" id="txtSku" type="text" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+              <label for="txtnombre">Nombre:</label>
+              <input value="{{prod.nombre}}" name="txtnombre" id="txtnombre" type="text" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+              <label for="txtprecio">Precio:</label>
+              <input value="{{prod.precio}}" name="txtprecio" id="txtprecio" type="text" class="form-control">
+          </div>
+
+
+          <div class="col-md-6">
+              <label for="txtStock">Stock:</label>
+              <input value="{{prod.stock}}" name="txtStock" id="txtStock" type="text" class="form-control">
+          </div>
+
+          <div class="col-md-6">
+              <label for="cmbCategoria">Categoria:</label>
+              <select id="cmbCategoria" name="cmbCategoria" class="form-select" aria-label="Default select example">
+                  <option disabled selected>Seleccione</option>
+                  {% for c in cate %}
+                  <option value="{{c.id_categoria}}" {% if c.id_categoria == prod.categoriaId.id_categoria %} selected {% endif %} >{{c.nombre_categoria}}</option>
+                  {% endfor %}
+                </select> 
+          </div>
+
+          <div class="col-md-12">
+              <label for="txtDescripcion">Descripcion:</label>
+              <input value="{{prod.descripcion}}" name="txtDescripcion" id="txtDescripcion" type="text" class="form-control">
+          </div>
+
+
+
+          <div class="col-md-12">
+              <label for="txtImagen">Imagen:</label>
+              <img src="{{prod.imagenUrl.url}}" height="100" alt="100">
+              <input name="txtImagen" id="txtImagen" type="file" class="form-control">
+          </div>
       </div>
-      <div class="col mt-3">
-        <label for="txtNombreProducto">Nombre:</label>
-        <input id="txtNombreProducto" name="txtNombreProducto" type="text" class="form-control">
-        <br>
-        <label for="txtTamanoProducto">Tamaño:</label>
-        <select id="txtTamanoProducto" name="txtTamanoProducto" class="form-select" aria-label="Default select example">
-          <option value="1">Pequeña</option>
-          <option value="2">Mediana</option>
-          <option value="3">Grande</option>
-        </select>
-        <br>
-      </div>
-      <button class="btn btn-success mt-3">Confirmar cambios</button>
-    </div>
+      <button class="btn btn-success mt-5 w-100">Editar producto</button>
   </form>
 </div>
 
