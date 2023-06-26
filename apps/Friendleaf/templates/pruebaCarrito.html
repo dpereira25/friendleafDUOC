@@ -33,11 +33,27 @@
       <div class="cards-wrapper2">
         <div class="container-fluid text-center">
           <div class="row d-flex">
-
-            {% for p in producto %}
+            <h2>Arbol</h2>
+            {% for p in cate_arbol %}
             <div class="col">
               <div class="cardProductos">
-                <img src="{{p.imagenUrl}}" id="fotoCarro" class="card-img-top" alt="...">
+                <img src="{{p.imagenUrl.url}}" id="fotoCarro" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{p.nombre}}</h5>
+                  <h6><span class="precio">${{p.precio}}</span></h6>
+                  <button class="btn btn-success button">Añadir al Carrito</button>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+          <div class="row d-flex">
+            <h2>Plantas</h2>
+            {% for p in cate_plantas %}
+            <div class="col">
+              <div class="cardProductos">
+                <img src="{{p.imagenUrl.url}}" id="fotoCarro" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{p.nombre}}</h5>
                   <h6><span class="precio">${{p.precio}}</span></h6>

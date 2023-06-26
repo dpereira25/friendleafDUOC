@@ -6,8 +6,8 @@ class Categoria(models.Model):
     nombreCategoria = models.CharField(max_length=25);
 
     def __str__(self):
-        txt = "{0} - {1}"
-        return txt.format(self.idCategoria , self.nombreCategoria);
+        txt = "{0}"
+        return txt.format(self.nombreCategoria);
 
 class Producto(models.Model):
     sku = models.CharField(primary_key=True, max_length=15);
@@ -15,7 +15,7 @@ class Producto(models.Model):
     precio = models.IntegerField();
     stock = models.IntegerField();
     descripcion = models.CharField(max_length=120);
-    imagenUrl = models.ImageField(upload_to='imagenesProductos');
+    imagenUrl = models.ImageField(upload_to='imgProductos');
     idCategoria = models.ForeignKey(Categoria, on_delete=models.CASCADE);
     
     def __str__(self):

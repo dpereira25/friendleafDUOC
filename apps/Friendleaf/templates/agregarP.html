@@ -8,7 +8,7 @@
 <h1 class="text-center">Agregar Productos</h1>
 
 <div class="container">
-  <form id="agregarP" action="/agregarProductoForm" method="POST" enctype="multipart/form-data">{% csrf_token %}
+  <form id="formAgregar" action="/agregarProductoForm" method="POST" enctype="multipart/form-data">{% csrf_token %}
     <div class="row">
       <div class="col-md-6">
         <label for="txtSku">SKU:</label>
@@ -16,11 +16,11 @@
       </div>
       <div class="col-md-6">
         <label for="txtnombre">Nombre:</label>
-        <input name="txtnombre" id="txtnombre" type="text" class="form-control">
+        <input name="txtNombre" id="txtnombre" type="text" class="form-control">
       </div>
       <div class="col-md-6">
         <label for="txtprecio">Precio:</label>
-        <input name="txtprecio" id="txtprecio" type="text" class="form-control">
+        <input name="txtPrecio" id="txtprecio" type="text" class="form-control">
       </div>
       <div class="col-md-6">
         <label for="txtStock">Stock:</label>
@@ -31,7 +31,7 @@
         <select id="cmbCategoria" name="cmbCategoria" class="form-select" aria-label="Default select example">
           <option disabled selected>Seleccione</option>
           {% for c in cate %}
-          <option value="{{c.id_categoria}}">{{c.nombre_categoria}}</option>
+          <option value="{{c.idCategoria}}">{{c.nombreCategoria}}</option>
           {% endfor %}
         </select>
       </div>
@@ -69,7 +69,7 @@
               <td>{{p.nombre}}</td>
               <td>{{p.precio}}</td>
               <td>{{p.descripcion}}</td>
-              <td>{{p.categoriaId.nombre_categoria}}</td>
+              <td>{{p.idCategoria}}</td>
               <td>{{p.stock}}</td>
               <td><a href="editarP/{{p.sku}}" class="btn btn-primary">Editar</a></td>
               <td><a href="eliminarP/{{p.sku}}" class="btn btn-danger">Eliminar</a></td>

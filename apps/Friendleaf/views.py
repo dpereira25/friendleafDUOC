@@ -19,16 +19,16 @@ def cargarAgregarProducto(request):
     return render(request,"agregarP.html",{"cate":categorias,"prod":productos})
 
 def agregarProducto(request):
-    v_categoria = Categoria.objects.get(id_categoria = request.POST['cmbCategoria'])
+    v_categoria = Categoria.objects.get(idCategoria = request.POST['cmbCategoria'])
 
     v_sku = request.POST['txtSku']
-    v_nombre = request.POST['txtnombre']
-    v_precio = request.POST['txtprecio']
+    v_nombre = request.POST['txtNombre']
+    v_precio = request.POST['txtPrecio']
     v_stock = request.POST['txtStock']
     v_descripcion = request.POST['txtDescripcion']
     v_imagen = request.FILES['txtImagen']
 
-    Producto.objects.create(sku = v_sku, nombre = v_nombre, precio = v_precio,stock = v_stock, descripcion = v_descripcion, imagenUrl=v_imagen,categoriaId = v_categoria)
+    Producto.objects.create(sku = v_sku, nombre = v_nombre, precio = v_precio, stock = v_stock, descripcion = v_descripcion, imagenUrl=v_imagen, idCategoria = v_categoria)
     
     return redirect('/agregarP')
 
@@ -38,7 +38,7 @@ def cargarEditarProducto(request,sku):
     return render(request,"editarP.html",{"prod":prod, "cate":categorias})
 
 def editarProducto(request):
-    v_categoria = Categoria.objects.get(id_categoria = request.POST['cmbCategoria'])
+    v_categoria = Categoria.objects.get(idCategoria = request.POST['cmbCategoria'])
 
     v_sku = request.POST['txtSku']
     productoBD = Producto.objects.get(sku = v_sku)
@@ -59,15 +59,15 @@ def editarProducto(request):
     productoBD.precio = v_precio
     productoBD.stock = v_stock
     productoBD.descripcion = v_descripcion
-    productoBD.categoriaId = v_categoria
+    productoBD.idCategoria = v_categoria
     productoBD.imagenUrl = v_imagen
     
     productoBD.save()
 
     return redirect('/agregarP')
 
-def eliminarProducto(request,codigo_producto):
-    producto = Producto.objects.get(sku = codigo_producto)
+def eliminarProducto(request,sku):
+    producto = Producto.objects.get(sku = sku)
     ruta_imagen = os.path.join(settings.MEDIA_ROOT, str(producto.imagenUrl))
     os.remove(ruta_imagen)
     producto.delete()
@@ -78,7 +78,9 @@ def cargarListarProducto(request):
 
 def cargarCarrito(request):
     productos = Producto.objects.all()
-    return render(request,"pruebaCarrito.html",{"producto":productos})
+    cate_producto_plantas = Producto.objects.filter(idCategoria = 1)
+    cate_producto_arbol = Producto.objects.filter(idCategoria = 2)
+    return render(request,"pruebaCarrito.html",{"producto":productos,"cate_arbol":cate_producto_arbol,"cate_plantas":cate_producto_plantas})
 
 def cargarEnvios(request):
     return render(request,"envios.html")
